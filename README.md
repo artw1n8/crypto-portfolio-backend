@@ -1,0 +1,1 @@
+Backend (FastAPI) for crypto portfolio
