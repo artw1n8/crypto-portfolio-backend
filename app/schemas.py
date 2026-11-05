@@ -1,4 +1,5 @@
 from datetime import datetime
+from decimal import Decimal
 
 from pydantic import BaseModel, EmailStr, SecretStr, Field, field_validator, ConfigDict
 
@@ -27,3 +28,24 @@ class UserRead(BaseModel):
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
+
+
+
+class AssetCreate (BaseModel):
+    coin_symbol: str = Field(min_length=2, max_length=72)
+    amount: int = Field(gt=0)
+    buy_price: Decimal = Field(gt=0)
+    buy_date: datetime
+
+class AssetEdit (BaseModel):
+    id: int
+    amount: int = Field(gt=0)
+    buy_price: Decimal = Field(gt=0)
+    buy_date: datetime
+
+class AssetRead (BaseModel):
+    id: int
+    coin_symbol: str = Field(min_length=2, max_length=72)
+    amount: int = Field(gt=0)
+    buy_price: Decimal = Field(gt=0)
+    buy_date: datetime
