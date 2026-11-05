@@ -5,6 +5,8 @@ from app.dependency import get_db
 from app.schemas import UserCreate, UserRead, TokenResponse
 from app.services import users as users_service
 from app.tokens import create_access_token
+from app.models import User
+from app.dependency import get_current_user
 
 router = APIRouter()
 
@@ -46,3 +48,7 @@ def login_user(data: UserCreate, db: Session = Depends(get_db)):
     token = create_access_token(user.id)
 
     return TokenResponse(access_token=token)
+
+@router.get("/profile", response_model=UserRead, status_code=200)
+def get_my_profile(current_user: User = Depends(get_current_user)):
+    return current_user
