@@ -18,7 +18,6 @@ def create_asset(db: Session, data: AssetCreate, user_id: int) -> Asset:
     try:
         asset = assets_repository.create(db, data, user_id)
 
-        db.commit()
     except Exception:
         db.rollback()
         raise
@@ -37,7 +36,6 @@ def edit_asset(db: Session, data: AssetEdit, user_id: int) -> Asset:
     try:
         asset = assets_repository.edit(db, data, user_id)
 
-        db.commit()
     except Exception:
         db.rollback()
         raise

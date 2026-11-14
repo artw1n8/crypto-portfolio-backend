@@ -30,7 +30,6 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
 
 
-
 class AssetCreate (BaseModel):
     coin_symbol: str = Field(min_length=2, max_length=72)
     amount: int = Field(gt=0)
@@ -49,3 +48,4 @@ class AssetRead (BaseModel):
     amount: int = Field(gt=0)
     buy_price: Decimal = Field(gt=0)
     buy_date: datetime
+    current_price: Decimal = Field(gt=0)
